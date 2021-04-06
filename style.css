@@ -1,0 +1,26 @@
+.weather-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.search-field {
+    height: 30px;
+    width: 200px;
+    float: right;
+    border: 1px solid black;
+}
+
+.submit-button {
+    height: 34px;
+    width: 80px;
+    text-align: center;
+    float: right;
+    border: 1px solid black;
+}
+
+
+.form-container {
+    display: flex;
+    float: right;
+}
