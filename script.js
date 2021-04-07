@@ -1,8 +1,8 @@
-//make function showing sun/rain/etc using weatherData.main and switch (may need to initially declare a condition)
 const form = document.getElementById('my-form');
 const submit = document.getElementById('submit');
 const display = document.querySelector('.weather-display');
 const city = document.getElementById('city');
+const body = document.querySelector('body');
 
 async function receiveData(event) {
     const value = city.value;
@@ -12,18 +12,27 @@ async function receiveData(event) {
     const weatherData = await fetch(weatherRequest, {mode: 'cors'});
     const newData = processData(await weatherData.json());
     showData(newData);
+    form.reset();
     }
     catch(error) {
-        alert(error);
+        alert('The city you entered is invalid. Please fix any typos and try again!');
     }
 }
+// async function receiveBackground(event) {
+    
+// }
+
+// function fetchCall(event) {
+//     receiveData;
+//     receiveBackground;
+// }
 
 form.addEventListener('submit', receiveData);
 
 function processData(weatherData) {
     const myData = {
         cityName: weatherData.name,
-        condition: weatherData.weather['0'].description,
+        condition: weatherData.weather['0'].main,
         temperature: weatherData.main.temp,
         feelsLike: weatherData.main.feels_like,
         humidity: weatherData.main.humidity
@@ -41,14 +50,13 @@ function showData(newData) {
     const humidity = document.getElementById('humidity')
     
     name.textContent = `${newData.cityName}`;
-    condition.textContent = `${newData.condition.toUpperCase()}`;
-    temp.textContent =  `TEMPERATURE: ${newData.temperature} \u00B0F`;
-    feel.textContent = `FEELS LIKE: ${newData.feelsLike} \u00B0F`;
-    humidity.textContent = `HUMIDITY: ${newData.humidity}%`;
+    condition.textContent = `Weather Condition: ${newData.condition}`;
+    temp.textContent =  `Temperature: ${newData.temperature} \u00B0F`;
+    feel.textContent = `Feels Like: ${newData.feelsLike} \u00B0F`;
+    humidity.textContent = `Humidity: ${newData.humidity}%`;
 
-    if( newData.textContent === "Clear") {
-        display.style.backgroundImage = './images/Weenie Weenie.png';
-    }
+    // const weatherCondition = newData.condition;
+
     
 }
 
